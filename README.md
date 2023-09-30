@@ -1,8 +1,6 @@
-# Welcome to your CDK TypeScript project
+# Experimental environment for non-intrusive monitoring of micrservices via an API Gateway
 
-This is a blank project for CDK development with TypeScript.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+Experimental environment to showcase how microservices can be monitored non-intrusively via an AWS API Gateway in the AWS cloud platform. The experimental environment was created as part of a master's thesis: TBA
 
 ## Useful commands
 
