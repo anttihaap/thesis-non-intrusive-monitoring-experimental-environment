@@ -1,0 +1,1758 @@
+{
+ "Resources": {
+  "alarmF25EE33D": {
+   "Type": "AWS::SNS::Topic",
+   "Properties": {
+    "DisplayName": "alarm"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/alarm/Resource"
+   }
+  },
+  "alarmexampleexamplecom13363CF5": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Protocol": "email",
+    "TopicArn": {
+     "Ref": "alarmF25EE33D"
+    },
+    "Endpoint": "example@example.com"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/alarm/example@example.com/Resource"
+   }
+  },
+  "service1proxyCountSumalarm": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+    "EvaluationPeriods": 1,
+    "AlarmActions": [
+     {
+      "Ref": "alarmF25EE33D"
+     }
+    ],
+    "AlarmDescription": "resource: /service1/{proxy+}, metric: Count, stats: Sum",
+    "AlarmName": "ALARM: /service1/{proxy+} Count Sum alarm",
+    "DatapointsToAlarm": 1,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(m, 3)",
+      "Id": "ad"
+     },
+     {
+      "Expression": "sum_DELETE + sum_GET + sum_HEAD + sum_PATCH + sum_POST",
+      "Id": "m"
+     },
+     {
+      "Id": "sum_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     }
+    ],
+    "ThresholdMetricId": "ad"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/--service1--{proxy+} Count Sum alarm"
+   }
+  },
+  "service1proxy4XXErrorSumalarm": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanUpperThreshold",
+    "EvaluationPeriods": 1,
+    "AlarmActions": [
+     {
+      "Ref": "alarmF25EE33D"
+     }
+    ],
+    "AlarmDescription": "resource: /service1/{proxy+}, metric: 4XXError, stats: Sum",
+    "AlarmName": "ALARM: /service1/{proxy+} 4XXError Sum alarm",
+    "DatapointsToAlarm": 1,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(m, 3)",
+      "Id": "ad"
+     },
+     {
+      "Expression": "sum_DELETE + sum_GET + sum_HEAD + sum_PATCH + sum_POST",
+      "Id": "m"
+     },
+     {
+      "Id": "sum_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     }
+    ],
+    "ThresholdMetricId": "ad"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/--service1--{proxy+} 4XXError Sum alarm"
+   }
+  },
+  "service1proxy5XXErrorSumalarm": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanUpperThreshold",
+    "EvaluationPeriods": 1,
+    "AlarmActions": [
+     {
+      "Ref": "alarmF25EE33D"
+     }
+    ],
+    "AlarmDescription": "resource: /service1/{proxy+}, metric: 5XXError, stats: Sum",
+    "AlarmName": "ALARM: /service1/{proxy+} 5XXError Sum alarm",
+    "DatapointsToAlarm": 1,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(m, 3)",
+      "Id": "ad"
+     },
+     {
+      "Expression": "sum_DELETE + sum_GET + sum_HEAD + sum_PATCH + sum_POST",
+      "Id": "m"
+     },
+     {
+      "Id": "sum_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     }
+    ],
+    "ThresholdMetricId": "ad"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/--service1--{proxy+} 5XXError Sum alarm"
+   }
+  },
+  "service1proxyLatencyAveragealarm": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanUpperThreshold",
+    "EvaluationPeriods": 1,
+    "AlarmActions": [
+     {
+      "Ref": "alarmF25EE33D"
+     }
+    ],
+    "AlarmDescription": "resource: /service1/{proxy+}, metric: Latency, stats: Average",
+    "AlarmName": "ALARM: /service1/{proxy+} Latency Average alarm",
+    "DatapointsToAlarm": 1,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(m, 3)",
+      "Id": "ad"
+     },
+     {
+      "Expression": "(average_DELETE * sampleCount_DELETE + average_GET * sampleCount_GET + average_HEAD * sampleCount_HEAD + average_PATCH * sampleCount_PATCH + average_POST * sampleCount_POST) / (sampleCount_DELETE + sampleCount_GET + sampleCount_HEAD + sampleCount_PATCH + sampleCount_POST)",
+      "Id": "m"
+     },
+     {
+      "Id": "average_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "average_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "average_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "average_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "average_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service1/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     }
+    ],
+    "ThresholdMetricId": "ad"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/--service1--{proxy+} Latency Average alarm"
+   }
+  },
+  "service2proxyCountSumalarm": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "LessThanLowerOrGreaterThanUpperThreshold",
+    "EvaluationPeriods": 1,
+    "AlarmActions": [
+     {
+      "Ref": "alarmF25EE33D"
+     }
+    ],
+    "AlarmDescription": "resource: /service2/{proxy+}, metric: Count, stats: Sum",
+    "AlarmName": "ALARM: /service2/{proxy+} Count Sum alarm",
+    "DatapointsToAlarm": 1,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(m, 3)",
+      "Id": "ad"
+     },
+     {
+      "Expression": "sum_DELETE + sum_GET + sum_HEAD + sum_PATCH + sum_POST",
+      "Id": "m"
+     },
+     {
+      "Id": "sum_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "Count",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     }
+    ],
+    "ThresholdMetricId": "ad"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/--service2--{proxy+} Count Sum alarm"
+   }
+  },
+  "service2proxy4XXErrorSumalarm": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanUpperThreshold",
+    "EvaluationPeriods": 1,
+    "AlarmActions": [
+     {
+      "Ref": "alarmF25EE33D"
+     }
+    ],
+    "AlarmDescription": "resource: /service2/{proxy+}, metric: 4XXError, stats: Sum",
+    "AlarmName": "ALARM: /service2/{proxy+} 4XXError Sum alarm",
+    "DatapointsToAlarm": 1,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(m, 3)",
+      "Id": "ad"
+     },
+     {
+      "Expression": "sum_DELETE + sum_GET + sum_HEAD + sum_PATCH + sum_POST",
+      "Id": "m"
+     },
+     {
+      "Id": "sum_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "4XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     }
+    ],
+    "ThresholdMetricId": "ad"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/--service2--{proxy+} 4XXError Sum alarm"
+   }
+  },
+  "service2proxy5XXErrorSumalarm": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanUpperThreshold",
+    "EvaluationPeriods": 1,
+    "AlarmActions": [
+     {
+      "Ref": "alarmF25EE33D"
+     }
+    ],
+    "AlarmDescription": "resource: /service2/{proxy+}, metric: 5XXError, stats: Sum",
+    "AlarmName": "ALARM: /service2/{proxy+} 5XXError Sum alarm",
+    "DatapointsToAlarm": 1,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(m, 3)",
+      "Id": "ad"
+     },
+     {
+      "Expression": "sum_DELETE + sum_GET + sum_HEAD + sum_PATCH + sum_POST",
+      "Id": "m"
+     },
+     {
+      "Id": "sum_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sum_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "5XXError",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Sum"
+      },
+      "ReturnData": false
+     }
+    ],
+    "ThresholdMetricId": "ad"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/--service2--{proxy+} 5XXError Sum alarm"
+   }
+  },
+  "service2proxyLatencyAveragealarm": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "ComparisonOperator": "GreaterThanUpperThreshold",
+    "EvaluationPeriods": 1,
+    "AlarmActions": [
+     {
+      "Ref": "alarmF25EE33D"
+     }
+    ],
+    "AlarmDescription": "resource: /service2/{proxy+}, metric: Latency, stats: Average",
+    "AlarmName": "ALARM: /service2/{proxy+} Latency Average alarm",
+    "DatapointsToAlarm": 1,
+    "Metrics": [
+     {
+      "Expression": "ANOMALY_DETECTION_BAND(m, 3)",
+      "Id": "ad"
+     },
+     {
+      "Expression": "(average_DELETE * sampleCount_DELETE + average_GET * sampleCount_GET + average_HEAD * sampleCount_HEAD + average_PATCH * sampleCount_PATCH + average_POST * sampleCount_POST) / (sampleCount_DELETE + sampleCount_GET + sampleCount_HEAD + sampleCount_PATCH + sampleCount_POST)",
+      "Id": "m"
+     },
+     {
+      "Id": "average_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "average_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "average_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "average_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "average_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "Average"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_DELETE",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "DELETE"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_GET",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "GET"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_HEAD",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "HEAD"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_PATCH",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "PATCH"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     },
+     {
+      "Id": "sampleCount_POST",
+      "MetricStat": {
+       "Metric": {
+        "Dimensions": [
+         {
+          "Name": "ApiName",
+          "Value": "TestRestAPI"
+         },
+         {
+          "Name": "Resource",
+          "Value": "/service2/{proxy+}"
+         },
+         {
+          "Name": "Stage",
+          "Value": "live"
+         },
+         {
+          "Name": "Method",
+          "Value": "POST"
+         }
+        ],
+        "MetricName": "Latency",
+        "Namespace": "AWS/ApiGateway"
+       },
+       "Period": 300,
+       "Stat": "SampleCount"
+      },
+      "ReturnData": false
+     }
+    ],
+    "ThresholdMetricId": "ad"
+   },
+   "Metadata": {
+    "aws:cdk:path": "cloudwatch-stack/--service2--{proxy+} Latency Average alarm"
+   }
+  },
+ }
+}
